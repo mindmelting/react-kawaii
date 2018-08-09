@@ -12,9 +12,9 @@ class AnimatePlanet extends Component {
   }
 
   render() {
-    const { color, mood, size } = this.props;
-    // Default to white as the existing From Color
-    let fromColor = '#FFFFFF';
+    const { color, mood, size, scale } = this.props;
+    // Default to new color as the existing From Color
+    let fromColor = color;
     if (this.svgAnimate) {
       const existingToColor = this.svgAnimate.getAttribute('to');
       if (existingToColor) {
@@ -49,9 +49,10 @@ class AnimatePlanet extends Component {
               <use
                 id="kawaii-planet__shape"
                 xlinkHref="#kawaii-planet__shape--path"
+                fill={fromColor}
               >
                 <animate
-                  ref={svgAnimate => (this.svgAnimate = svgAnimate)}
+                  ref={el => (this.svgAnimate = el)}
                   attributeName="fill"
                   attributeType="css"
                   dur="0.3s"
@@ -70,7 +71,12 @@ class AnimatePlanet extends Component {
                 xlinkHref="#kawaii-planet__shadow--path"
               />
             </g>
-            <Face mood={mood} transform="translate(34 57)" />
+            <Face
+              animateSmile
+              scale={scale}
+              mood={mood}
+              transform="translate(34 57)"
+            />
           </g>
         </svg>
       </Wrapper>
@@ -88,12 +94,14 @@ AnimatePlanet.propTypes = {
    * Hex color
    */
   color: PropTypes.string,
+  scale: PropTypes.number,
 };
 
 AnimatePlanet.defaultProps = {
   size: 150,
   mood: 'blissful',
   color: '#FCCB7E',
+  scale: 1,
 };
 
 export default AnimatePlanet;

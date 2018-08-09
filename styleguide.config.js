@@ -13,6 +13,7 @@ module.exports = {
     {
       name: 'Components',
       components: () => [
+        './src/animatePlanet/AnimatePlanet.jsx',
         './src/browser/Browser.jsx',
         './src/creditCard/CreditCard.jsx',
         './src/ghost/Ghost.jsx',
